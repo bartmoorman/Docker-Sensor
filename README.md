@@ -5,9 +5,7 @@
 docker run \
 --detach \
 --name sensor \
---publish 2876:2876 \
---env "HTTPD_SERVERNAME=**sub.do.main**" \
---volume /sys:/sys \
---volume sensor-config:/config \
+--privileged \
+--env "THINGSPEAK_API_KEY=**channel api key**" \
 bmoorman/sensor:latest
 ```
