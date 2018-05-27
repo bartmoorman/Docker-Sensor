@@ -4,26 +4,24 @@ from time import sleep
 from datetime import datetime
 import Adafruit_DHT as DHT
 
-DHT_TYPE = getattr(DHT, os.getenv('SENSOR_TYPE'))
-DHT_PIN = os.getenv('SENSOR_PIN')
-API_KEY = os.getenv('THINGSPEAK_API_KEY')
-TEMP_C = os.getenv('THINGSPEAK_TEMP_C')
-TEMP_F = os.getenv('THINGSPEAK_TEMP_F')
-HUMIDITY = os.getenv('THINGSPEAK_HUMIDITY')
+DHT_PIN = os.getenv('DHT_PIN')
+DHT_TYPE = getattr(DHT, os.getenv('DHT_TYPE'))
+DASHBOARD_HOST = os.getenv('DASHBOARD_HOST')
+DASHBOARD_TOKEN = os.getenv('DASHBOARD_TOKEN')
 
 while True:
-  humidity, temperatureC = DHT.read_retry(DHT_TYPE, DHT_PIN)
-
-  if humidity is not None and temperatureC is not None:
-    temperatureF = temperatureC * 9 / 5 + 32
-    if API_KEY is not None:
-      payload = {'api_key': API_KEY, TEMP_C: round(temperatureC, 1), TEMP_F: round(temperatureF, 1), HUMIDITY: round(humidity, 1)}
-      r = requests.get('https://api.thingspeak.com/update', params=payload)
-      if r.status_code is not requests.codes.ok:
-        print('{} - Unable to update thingspeak'.format(datetime.now()))
+  humidity, temperature = DHT.read_retry(DHT_TYPE, DHT_PIN)
+  if humidity is not None and temperature is not None:
+    if DASHBOARD_HOST is not None and DASHBOARD_TOKEN is not None:
+      payload = {'func': 'putReading', 'token': DASHBOARD_TOKEN, 'temperature': temperature, 'humidity': humidity}
+      try:
+        r = requests.post(DASHBOARD_HOST + '/src/action.php', data=payload)
+      except requests.exceptions.RequestException as exception:
+        print('{0} - {1}'.format(datetime.now(), exception))
     else:
-      print('{} - THINGSPEAK_API_KEY is empty'.format(datetime.now()))
+      print('{0} - Dasboard host is not configured'.format(datetime.now()))
+      print('Temperature={0:0.2f}*C, Humidity={1:0.2f}%'.format(temperature, humidity))
     sleep(30)
   else:
-    print('{} - Unable to read sensor'.format(datetime.now()))
+    print('{0} - Unable to read {1} on GPIO {2}'.format(datetime.now(), DHT_TYPE, DHT_PIN))
     sleep(5)

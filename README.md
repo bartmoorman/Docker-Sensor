@@ -6,6 +6,7 @@ docker run \
 --detach \
 --name sensor \
 --privileged \
---env "THINGSPEAK_API_KEY=**channel api key**" \
+--env "DASHBOARD_HOST=**sub.do.main**" \
+--env "DASHBOARD_TOKEN=da03bc3094b83de7"
 bmoorman/sensor:latest
 ```
