@@ -12,7 +12,7 @@ RUN apk add --no-cache \
     py-requests \
     py-setuptools \
  && apk add --no-cache --virtual .build-deps \
-    g++ \
+    build-base \
     python-dev \
  && python setup.py install \
  && apk del --no-cache .build-deps
