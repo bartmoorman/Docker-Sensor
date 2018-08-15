@@ -15,7 +15,7 @@ while True:
     if DASHBOARD_HOST is not None and DASHBOARD_TOKEN is not None:
       payload = {'func': 'putReading', 'token': DASHBOARD_TOKEN, 'temperature': temperature, 'humidity': humidity}
       try:
-        r = requests.post(DASHBOARD_HOST + '/src/action.php', data=payload)
+        r = requests.post(DASHBOARD_HOST + '/src/action.php', data=payload, timeout=5.0)
       except requests.exceptions.RequestException as exception:
         print('{0} - {1}'.format(datetime.now(), exception))
     else:
