@@ -5,7 +5,7 @@ ENV DHT_PIN="17" \
 
 WORKDIR /opt/Adafruit_Python_DHT
 
-COPY Adafruit_Python_DHT .
+COPY Adafruit_Python_DHT/ .
 
 RUN apk add --no-cache \
     python \
