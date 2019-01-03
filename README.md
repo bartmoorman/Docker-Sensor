@@ -7,6 +7,6 @@ docker run \
 --name sensor \
 --privileged \
 --env "DASHBOARD_HOST=**sub.do.main**" \
---env "DASHBOARD_TOKEN=da03bc3094b83de7"
+--env "DASHBOARD_KEY=da03bc3094b83de7"
 bmoorman/sensor:latest
 ```

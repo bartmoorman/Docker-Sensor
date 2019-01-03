@@ -7,13 +7,13 @@ import Adafruit_DHT as DHT
 DHT_PIN = os.getenv('DHT_PIN')
 DHT_TYPE = getattr(DHT, os.getenv('DHT_TYPE'))
 DASHBOARD_HOST = os.getenv('DASHBOARD_HOST')
-DASHBOARD_TOKEN = os.getenv('DASHBOARD_TOKEN')
+DASHBOARD_KEY = os.getenv('DASHBOARD_KEY')
 
 while True:
   humidity, temperature = DHT.read_retry(DHT_TYPE, DHT_PIN)
   if humidity is not None and temperature is not None:
-    if DASHBOARD_HOST is not None and DASHBOARD_TOKEN is not None:
-      payload = {'func': 'putReading', 'token': DASHBOARD_TOKEN, 'temperature': temperature, 'humidity': humidity}
+    if DASHBOARD_HOST is not None and DASHBOARD_KEY is not None:
+      payload = {'func': 'putReading', 'key': DASHBOARD_KEY, 'temperature': temperature, 'humidity': humidity}
       try:
         r = requests.post(DASHBOARD_HOST + '/src/action.php', data=payload, timeout=5.0)
       except requests.exceptions.RequestException as exception:
