@@ -1,4 +1,4 @@
-FROM bmoorman/alpine:armhf
+FROM bmoorman/alpine:armhf-latest
 
 ENV DHT_PIN="17" \
     DHT_TYPE="DHT22"
