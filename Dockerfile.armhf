@@ -1,4 +1,4 @@
-FROM --platform=armhf bmoorman/alpine:armhf-3.8
+FROM bmoorman/alpine:armhf-3.8
 
 ENV DHT_PIN="17" \
     DHT_TYPE="DHT22"
@@ -14,7 +14,7 @@ RUN apk add --no-cache \
  && apk add --no-cache --virtual .build-deps \
     build-base \
     python-dev \
- && python setup.py install --force-pi \
+ && python setup.py install \
  && apk del --no-cache .build-deps
 
 COPY bin/ /usr/local/bin/
