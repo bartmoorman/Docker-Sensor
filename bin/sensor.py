@@ -8,6 +8,7 @@ DHT_PIN = os.getenv('DHT_PIN')
 DHT_TYPE = getattr(DHT, os.getenv('DHT_TYPE'))
 DASHBOARD_HOST = os.getenv('DASHBOARD_HOST')
 DASHBOARD_KEY = os.getenv('DASHBOARD_KEY')
+SESSION = requests.Session()
 
 while True:
   humidity, temperature = DHT.read_retry(DHT_TYPE, DHT_PIN)
@@ -15,7 +16,7 @@ while True:
     if DASHBOARD_HOST is not None and DASHBOARD_KEY is not None:
       payload = {'func': 'putReading', 'key': DASHBOARD_KEY, 'temperature': temperature, 'humidity': humidity}
       try:
-        r = requests.post(DASHBOARD_HOST + '/src/action.php', data=payload, timeout=5.0)
+        SESSION.post(DASHBOARD_HOST + '/src/action.php', data=payload, timeout=5.0)
       except requests.exceptions.RequestException as exception:
         print('{0} - {1}'.format(datetime.now(), exception))
     else:
