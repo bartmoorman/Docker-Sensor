@@ -4,7 +4,7 @@ from time import sleep
 from datetime import datetime
 import Adafruit_DHT as DHT
 
-DHT_PIN = os.getenv('DHT_PIN')
+DHT_PIN = int(os.getenv('DHT_PIN'))
 DHT_TYPE = getattr(DHT, os.getenv('DHT_TYPE'))
 DASHBOARD_HOST = os.getenv('DASHBOARD_HOST')
 DASHBOARD_KEY = os.getenv('DASHBOARD_KEY')
