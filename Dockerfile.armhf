@@ -1,8 +1,5 @@
 FROM bmoorman/alpine:armhf-3.8
 
-ENV DHT_PIN="17" \
-    DHT_TYPE="DHT22"
-
 WORKDIR /opt/Adafruit_Python_DHT
 
 COPY Adafruit_Python_DHT/ .

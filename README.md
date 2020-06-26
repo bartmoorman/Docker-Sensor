@@ -1,13 +1,12 @@
-## This is designed for a Raspberry Pi
+Gather environment readings for [Sensor Dashboard](https://github.com/iVirus/Docker-Sensor-Dashboard)
 
 ### Docker Run
 ```
 docker run \
 --detach \
 --name sensor \
+--restart unless-stopped \
 --privileged \
---env "DASHBOARD_HOST=https://**sub.do.main**" \
---env "DASHBOARD_KEY=da03bc3094b83de7" \
 bmoorman/sensor:armhf-latest
 ```
 
@@ -18,8 +17,15 @@ services:
   sensor:
     image: bmoorman/sensor:armhf-latest
     container_name: sensor
-    environment:
-      - DASHBOARD_HOST=https://**sub.do.main**
-      - DASHBOARD_KEY=da03bc3094b83de7
+    restart: unless-stopped
     privileged: true
 ```
+
+### Environment Variables
+|Variable|Description|Default|
+|--------|-----------|-------|
+|TZ|Sets the timezone|`America/Denver`|
+|DASHBOARD_HOST|Sets the Dashboard host|`<empty>`|
+|DASHBOARD_KEY|Sets the Dashboard key for this sensor|`<empty>`|
+|DHT_PIN|Sets the input pin to which the environment sensor is attached|`<empty>`|
+|DHT_TYPE|Sets the attached sensor type (`DHT11`, `DHT22`, or `AM2302`)|`DHT22`|

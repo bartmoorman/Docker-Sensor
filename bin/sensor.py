@@ -5,7 +5,7 @@ from datetime import datetime
 import Adafruit_DHT as DHT
 
 DHT_PIN = int(os.getenv('DHT_PIN'))
-DHT_TYPE = getattr(DHT, os.getenv('DHT_TYPE'))
+DHT_TYPE = getattr(DHT, os.getenv('DHT_TYPE', 'DHT22'))
 DASHBOARD_HOST = os.getenv('DASHBOARD_HOST')
 DASHBOARD_KEY = os.getenv('DASHBOARD_KEY')
 SESSION = requests.Session()
