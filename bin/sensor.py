@@ -34,7 +34,7 @@ while True:
           print('{0} - {1}'.format(datetime.now(), exception))
       else:
         print('{0} - Temperature={1:0.2f}*C, Humidity={2:0.2f}%'.format(datetime.now(), temperature, humidity))
-      sleep(FREQUENCY)
+      sleep(int(FREQUENCY))
     else:
       print('{0} - Unable to read {1} on GPIO {2}'.format(datetime.now(), DHT_TYPE, DHT_PIN))
       sleep(5)
