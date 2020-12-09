@@ -1,17 +1,13 @@
 FROM bmoorman/alpine:armhf-3.8
 
-WORKDIR /opt/Adafruit_Python_DHT
-
-COPY Adafruit_Python_DHT/ .
-
 RUN apk add --no-cache \
     python \
     py-requests \
-    py-setuptools \
  && apk add --no-cache --virtual .build-deps \
     build-base \
     python-dev \
- && python setup.py install \
+    py-pip \
+ && pip install Adafruit-DHT \
  && apk del --no-cache .build-deps
 
 COPY bin/ /usr/local/bin/

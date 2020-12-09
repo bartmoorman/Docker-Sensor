@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import sys, os, requests
+import os, requests
 from time import sleep
 from datetime import datetime
 import Adafruit_DHT as DHT
