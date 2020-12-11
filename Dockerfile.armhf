@@ -5,8 +5,8 @@ RUN apk add --no-cache \
     py-requests \
  && apk add --no-cache --virtual .build-deps \
     build-base \
-    python-dev \
     py-pip \
+    python-dev \
  && pip install Adafruit-DHT \
  && apk del --no-cache .build-deps
 
