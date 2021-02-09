@@ -8,7 +8,7 @@ RUN apk add --no-cache \
     py3-pip \
     py3-wheel \
     python3-dev \
- && pip install Adafruit-DHT \
+ && pip3 install Adafruit-DHT \
  && apk del --no-cache .build-deps
 
 COPY bin/ /usr/local/bin/
