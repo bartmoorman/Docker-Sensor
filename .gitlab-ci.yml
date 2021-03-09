@@ -17,17 +17,26 @@ after_script:
   - docker logout ${CI_REGISTRY}
 
 build:
-  stage: build
+  stage:
+    - build
+  tags:
+    - arm
   script:
     - docker build --pull --tag ${DOCKER_HUB_IMAGE} --tag ${GITLAB_IMAGE} .
 
 push:
-  stage: push
+  stage:
+    - push
+  tags:
+    - arm
   script:
     - docker push ${DOCKER_HUB_IMAGE}
     - docker push ${GITLAB_IMAGE}
 
 cleanup:
-  stage: cleanup
+  stage:
+    - cleanup
+  tags:
+    - arm
   script:
     - docker image rm ${DOCKER_HUB_IMAGE} ${GITLAB_IMAGE}
