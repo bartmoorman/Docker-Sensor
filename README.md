@@ -27,6 +27,6 @@ services:
 |TZ|Sets the timezone|`America/Denver`|
 |DASHBOARD_HOST|Sets the Dashboard host|`<empty>`|
 |DASHBOARD_KEY|Sets the Dashboard key for this sensor|`<empty>`|
-|DHT_PIN|Sets the input pin to which the environment sensor is attached|`<empty>`|
 |DHT_TYPE|Sets the attached sensor type (`DHT11`, `DHT22`, or `AM2302`)|`DHT22`|
+|DHT_PIN|Sets the BCM pin where the environment sensor is attached|`D17`|
 |FREQUENCY|Sets how often to collect (and send) readings [seconds]|`30`|
