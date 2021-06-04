@@ -6,7 +6,7 @@ RUN apk add --no-cache \
  && apk add --no-cache --virtual .build-deps \
     build-base \
     python3-dev \
- && pip3 install adafruit-circuitpython-dht RPi.GPIO requests \
+ && pip3 install pigpio-dht requests \
  && apk del --no-cache .build-deps
 
 COPY bin/ /usr/local/bin/
